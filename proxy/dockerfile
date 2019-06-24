@@ -1,0 +1,21 @@
+FROM nginx:alpine
+
+USER root
+
+RUN rm /etc/nginx/conf.d/*
+
+RUN mkdir -p /etc/nginx/html && \
+    mkdir -p /var/nginx/cache && \
+    mkdir -p /var/log/nginx
+
+COPY etc/ /etc/
+COPY ./entrypoint.sh /
+
+# Define working directory.
+WORKDIR /etc/nginx
+
+# Define default command.
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Expose ports.
+EXPOSE 80 443

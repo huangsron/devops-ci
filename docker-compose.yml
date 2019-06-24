@@ -1,0 +1,11 @@
+---
+version: '2'
+
+services: 
+  proxy:
+    build: proxy
+    image: nginx_proxy:dev
+    container_name: nginx_proxy_dev
+    ports:
+        - "80:80"
+        - "443:443"

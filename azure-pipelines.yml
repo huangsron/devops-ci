@@ -1,0 +1,28 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool: Default
+
+steps:
+- script: sudo ./build.sh
+  displayName: 'Run a one-line script'
+
+- script: |
+    sudo pip install requests
+    sudo pip install Html-TestRunner
+    sudo pip install unittest-xml-reporting
+    sudo python tests/test_keepalived.py
+  displayName: 'python'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+
+- script: sudo ./stop.sh
+  displayName: 'Run a one-line script'

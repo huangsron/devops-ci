@@ -1,0 +1,1 @@
+curl http://localhost -H "host: keepalived.domain.local" -I
